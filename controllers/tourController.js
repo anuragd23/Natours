@@ -3,7 +3,6 @@ const fs = require('fs');
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`));
 
 exports.checkID = (req, res, next, val) => {
-    console.log(`Tour id is ${val}`);
     const id = val * 1;
     const tour = tours.find(el => el.id === id);
 
@@ -17,7 +16,6 @@ exports.checkID = (req, res, next, val) => {
 };
 
 exports.checkBody = (req, res, next) => {
-    console.log(`You are inside checkBody!,`);
     const { name, price } = req.body;
 
     if (!name || !price) {
