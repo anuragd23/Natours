@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const app = require('./app');
 
 dotenv.config({ path: './config.env'});
 
@@ -16,7 +17,23 @@ mongoose.connect(DB, {
 //    console.log(con.connections);
 })
 
-const app = require('./app');
+const tourSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: [true, "A Tour must have a name"],
+        unique: true
+    },
+    rating: {
+        type: Number,
+        default: 4.5
+    },
+    price: {
+        type: Number,
+        required: [true, "A Tour must have a price"]
+    }
+});
+
+const Tour = mongoose.model('Tour', tourSchema);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
