@@ -1,6 +1,13 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
 const Tour = require('../models/tourModel');
 
+exports.aliasTopTours = (req, res, next) => {
+  req.query.sort = '-ratingsAverage,price';
+  req.query.limit = '5';
+  req.query.fields = 'name,price,ratingsAverahe,summary,difficulty';
+  next();
+};
+
 /*
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
